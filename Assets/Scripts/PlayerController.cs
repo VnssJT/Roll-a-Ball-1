@@ -9,6 +9,8 @@ public class PlayerController : MonoBehaviour
 
     public float speed = 0;
     public TextMeshProUGUI countText;
+    public GameObject winTextObject;
+    public int nPickUps;
 
     private Rigidbody rb;
     private float movementX;
@@ -21,6 +23,7 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         count = 0;
         SetCountText();
+        winTextObject.gameObject.SetActive(false);
     }
 
     void OnMove(InputValue movementValue){
@@ -32,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
     void SetCountText(){
         countText.text = "Count: " + count.ToString();
+        if(count >= nPickUps){
+            winTextObject.gameObject.SetActive(true);
+        }
     }
 
     void FixedUpdate(){
